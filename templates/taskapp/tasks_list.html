@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Всі задачі{% endblock %}
+{% block content %}
+<a type="button" class="btn btn-success" href="#">Створити задачу</a>
+{% for task in tasks %}
+<div class="card" style="width: 18rem;">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"><b>{{ task.name }}</b></li>
+        <li class="list-group-item">{{ task.description }}</li>
+        <li class="list-group-item">{{ task.get_status }}</li>
+        <li class="list-group-item">{{ task.get_priority }}</li>
+        {% if task.due_date %}<li class="list-group-item">{{ task.due_date|date:"d M Y" }}</li>{% endif %}
+        <li class="list-group-item">{{ task.created_at|date:"d M Y" }}</li>
+    </ul>
+</div>
+{% endfor %}
+{% endblock %}
