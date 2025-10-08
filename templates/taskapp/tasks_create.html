@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Створення задачі{% endblock %}
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Створити</button>
+</form>
+{% endblock %}
