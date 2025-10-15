@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Оновлення задачі{% endblock %}
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Зберегти</button>
+    <a href="{% url 'tasks-list' %}" class="btn btn-secondary">Скасувати</a>
+</form>
+{% endblock %}
