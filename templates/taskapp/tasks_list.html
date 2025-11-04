@@ -1,15 +1,28 @@
 {% extends 'base.html' %}
 {% block title %}Всі задачі{% endblock %}
 {% block content %}
-<div class="container text-start my-3">
-    <a type="button" class="btn btn-success" href="{% url 'tasks-create' %}">Створити задачу</a>
+<div class="container my-3">
+    <div class="row align-items-center">
+        <div class="col-md-4 text-start">
+            <a type="button" class="btn btn-success" href="{% url 'tasks-create' %}">Створити задачу</a>
+        </div>
+        <div class="col-md-8">
+            <form method="GET" class="d-flex justify-content-end align-items-center gap-2">
+                {{ filter_form.status.label_tag }}
+                {{ filter_form.status }}
+                {{ filter_form.priority.label_tag }}
+                {{ filter_form.priority }}
+                <button type="submit" class="btn btn-primary">Фільтрувати</button>
+            </form>
+        </div>
+    </div>
 </div>
     {% for task in tasks %}
 <div class="row">
   <div class="col-sm-6">
     <div class="card border-3 border-success">
       <div class="card-body">
-        <h5 class="card-title"><a href="{% url 'tasks-detail' task.pk %}"></a>></h5>
+        <h5 class="card-title"><a href="{% url 'tasks-detail' task.pk %}">{{ task.name }}</a></h5>
         <p class="card-text">{{ task.description }}</p>
         <span class="badge text-bg-primary">{{ task.get_priority_display }}</span>
         <span class="badge text-bg-success">{{ task.get_status_display }}</span>

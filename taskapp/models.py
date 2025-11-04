@@ -29,3 +29,11 @@ class Task(models.Model):
     def __str__(self):
         return self.name
     
+class Comment(models.Model):
+    content = models.TextField(max_length=255)
+    media = models.FileField(upload_to="comment_media", blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    task = models.ForeignKey(Task, on_delete=models.CASCADE)
