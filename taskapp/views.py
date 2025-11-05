@@ -54,6 +54,7 @@ class TaskDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["comment_form"] = forms.CommentForm()
+        context["comments"] = self.object.comment_set.order_by("-created_at")
         return context
     
     def post(self, request, *args, **kwargs):
@@ -65,7 +66,9 @@ class TaskDetailView(DetailView):
             comment.save()
             return redirect("tasks-detail", pk=comment.task.pk)
         else:
-            pass
+            context = self.get_context_data(form=forms)
+            return context
+
 
 
 class TaskDeleteView(LoginRequiredMixin, UserIsOwnerMixin, DeleteView):
